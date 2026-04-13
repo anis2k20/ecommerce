@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use App\Http\Controllers\CategoryController;
 
 Route::inertia('/', 'Welcome', [
     'canRegister' => Features::enabled(Features::registration()),
@@ -12,7 +13,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('admin/categories', 'admin/Categories')->name('admin.categories');
+    Route::get('admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
 });
 
 require __DIR__.'/settings.php';
