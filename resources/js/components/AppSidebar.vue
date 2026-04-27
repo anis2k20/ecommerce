@@ -25,7 +25,12 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Categories',
-        href: 'admin/categories',
+        href: '/admin/categories',
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Products',
+        href: '/admin/products',
         icon: LayoutGrid,
     },
 ];
