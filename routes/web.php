@@ -9,6 +9,9 @@ Route::inertia('/', 'Welcome', [
     'canRegister' => Features::enabled(Features::registration()),
 ])->name('home');
 
+// for customer panel
+Route::get('/products', [ProductController::class, 'publicIndex'])->name('products.index');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
 });
@@ -23,5 +26,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.store');
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.product.create');
 });
+
+
 
 require __DIR__.'/settings.php';

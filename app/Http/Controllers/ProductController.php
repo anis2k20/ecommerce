@@ -23,6 +23,19 @@ class ProductController extends Controller
         ]);
     }
 
+    public function publicIndex(){
+        $products = Product::with('category')->orderBy('id','desc')->paginate(10);
+
+        $products->getCollection()->transform(function($product){
+            $product->image_url = $product->image ? Storage::url($product->image) : null;
+            return $product;
+        });
+
+        return Inertia::render('Products', ['products' => $products])
+            ->withViewData(['layout' => 'layouts.FrontendLayout']);
+
+    }
+
     public function create(){
         return Inertia::render('Admin/ProductCreate', [
             'categories' => Category::all()->map(function($category){
